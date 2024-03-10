@@ -14,3 +14,8 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+    volumes:
+      - data:/home/webui
+
+volumes:
+  data:
