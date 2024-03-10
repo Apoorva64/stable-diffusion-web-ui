@@ -10,7 +10,7 @@ RUN python3 -m venv venv
 RUN . venv/bin/activate
 RUN pip install -r requirements.txt
 # install tcmalloc
-RUN apt-get update && apt-get install -y libtcmalloc-minimal4 libgl1-mesa-glx
+RUN apt-get update && apt-get install -y libtcmalloc-minimal4 libgl1-mesa-glx ffmpeg libsm6 libxext6 ibglib2.0-0 libxrender1
 
 # Create a user
 RUN useradd -ms /bin/bash webui
