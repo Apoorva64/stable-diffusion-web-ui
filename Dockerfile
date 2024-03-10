@@ -16,6 +16,19 @@ RUN apt-get update && apt-get install -y libtcmalloc-minimal4
 RUN useradd -ms /bin/bash webui
 # add permissions for current dir to the new user
 RUN chown -R webui:webui /home/webui/stable-diffusion-webui
+# add /home/webui/.cache to the new user
+RUN mkdir /home/webui/.cache
+RUN chown -R webui:webui /home/webui/.cache
+# add /home/webui/.torch to the new user
+RUN mkdir /home/webui/.torch
+RUN chown -R webui:webui /home/webui/.torch
+# add /home/webui/.local to the new user
+RUN mkdir /home/webui/.local
+RUN chown -R webui:webui /home/webui/.local
+
+# add pip cache to the new user
+RUN mkdir /home/webui/.cache/pip
+RUN chown -R webui:webui /home/webui/.cache/pip
 
 # Change to the new user
 USER webui
