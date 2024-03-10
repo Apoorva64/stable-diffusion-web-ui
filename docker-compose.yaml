@@ -16,6 +16,8 @@ services:
               capabilities: [gpu]
     volumes:
       - data:/home/webui
+    environment:
+      - COMMANDLINE_ARGS=--listen 0.0.0.0 --port 7860
 
 volumes:
   data:
