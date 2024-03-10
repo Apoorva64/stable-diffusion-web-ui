@@ -8,6 +8,8 @@ RUN useradd -ms /bin/bash webui
 USER webui
 # Set the working directory
 WORKDIR /home/webui/stable-diffusion-webui
+
+RUN pip install -r requirements.txt
 CMD ["./webui.sh"]
 
 EXPOSE 8000
