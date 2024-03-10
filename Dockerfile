@@ -9,6 +9,9 @@ RUN python3 -m venv venv
 
 RUN . venv/bin/activate
 RUN pip install -r requirements.txt
+# install tcmalloc
+RUN apt-get update && apt-get install -y libtcmalloc-minimal4
+
 # Create a user
 RUN useradd -ms /bin/bash webui
 # add permissions for current dir to the new user
