@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "50005:8080"
+      - "50005:7860"
     # gpu
     deploy:
       resources:
