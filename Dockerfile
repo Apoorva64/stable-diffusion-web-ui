@@ -11,6 +11,9 @@ RUN . venv/bin/activate
 RUN pip install -r requirements.txt
 # Create a user
 RUN useradd -ms /bin/bash webui
+# add permissions for current dir to the new user
+RUN chown -R webui:webui /home/webui/stable-diffusion-webui
+
 # Change to the new user
 USER webui
 # Set the working directory
