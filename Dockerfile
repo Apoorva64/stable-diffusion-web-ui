@@ -5,10 +5,6 @@ RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui && cd stab
 
 WORKDIR /home/webui/stable-diffusion-webui
 
-RUN python3 -m venv venv
-
-RUN . venv/bin/activate
-RUN pip install -r requirements.txt
 # install tcmalloc
 RUN apt-get update && apt-get install -y libtcmalloc-minimal4 libgl1-mesa-glx ffmpeg libsm6 libxext6 ibglib2.0-0 libxrender1
 
@@ -30,13 +26,8 @@ RUN chown -R webui:webui /home/webui/.local
 RUN mkdir /home/webui/.cache/pip
 RUN chown -R webui:webui /home/webui/.cache/pip
 
-COPY prepare.py ./prepare.py
-
 # Change to the new user
 USER webui
-
-RUN python prepare.py
-# Set the working directory
 
 CMD ["./webui.sh"]
 
