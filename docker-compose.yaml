@@ -4,16 +4,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "50005:7860"
-    # gpu
+    expose:
+      - 7860  # gpu
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
               count: 1
-              capabilities: [gpu]
+              capabilities: [ gpu ]
     volumes:
       - data:/home/webui
     environment:
