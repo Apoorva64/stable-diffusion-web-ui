@@ -35,7 +35,7 @@ COPY prepare.py ./prepare.py
 # Change to the new user
 USER webui
 
-RUN python prepare.py
+RUN python prepare.py --skip-torch-cuda-test
 # Set the working directory
 
 CMD ["./webui.sh"]
