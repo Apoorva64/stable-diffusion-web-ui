@@ -30,8 +30,12 @@ RUN chown -R webui:webui /home/webui/.local
 RUN mkdir /home/webui/.cache/pip
 RUN chown -R webui:webui /home/webui/.cache/pip
 
+COPY prepare.py ./prepare.py
+
 # Change to the new user
 USER webui
+
+RUN python prepare.py
 # Set the working directory
 
 CMD ["./webui.sh"]
