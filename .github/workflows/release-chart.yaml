@@ -15,11 +15,3 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Push Helm Chart to ChartMuseum
-        uses: bsord/helm-push@v4.1.0
-        with:
-          username: ${{ secrets.HARBOR_USER }}
-          password: ${{ secrets.HARBOR_PASSWORD }}
-          registry-url: https://harbor.devops-tools.apoorva64.com/stable-diffusion/stable-diffusion
-          force: true
-          chart-folder: charts/stable-diffusion-ui

@@ -3,10 +3,10 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: harbor.devops-tools.apoorva64.com/stable-diffusion/stable-diffusion@sha256:f632ff8365f3d48639f7b0bf703f1a66bffccf90fdd66298a827a1f550307378
+  repository: harbor.devops-tools.apoorva64.com/stable-diffusion/stable-diffusion
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: [ ]
 nameOverride: ""
