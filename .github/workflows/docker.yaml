@@ -10,7 +10,7 @@ jobs:
   docker:
     permissions:
       packages: write
-    runs-on: ubuntu-latest
+    runs-on: stable-diffusion-runners
     steps:
       -
         name: Checkout
