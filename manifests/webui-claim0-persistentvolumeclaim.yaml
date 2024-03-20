@@ -11,5 +11,5 @@ spec:
   storageClassName: nfs-client
   resources:
     requests:
-      storage: 100Mi
+      storage: 1Ti
 status: { }
