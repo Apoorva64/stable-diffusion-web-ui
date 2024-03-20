@@ -15,12 +15,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configure Git
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
-        env:
-          CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push Helm Chart to ChartMuseum
+        uses: bsord/helm-push@4.2.0
+        with:
+          username: ${{ secrets.HARBOR_USER }}
+          password: ${{ secrets.HARBOR_PASSWORD }}
+          useOCIRegistry: true
+          registry-url: oci://harbor.devops-tools.apoorva64.com/stable-diffusion
+          force: true
+          chart-folder: charts/stable-diffusion-ui
