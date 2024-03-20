@@ -17,6 +17,7 @@ spec:
       labels:
         io.kompose.service: webui
     spec:
+
       containers:
         - env:
             - name: COMMANDLINE_ARGS
@@ -26,11 +27,16 @@ spec:
           name: webui
           ports:
             - containerPort: 7860
-          resources: { }
+          resources:
+            limits:
+              nvidia.com/gpu: 1
           volumeMounts:
             - mountPath: /home/webui
               name: webui-claim0
       restartPolicy: Always
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        kubernetes.io/os: linux
       runtimeClassName: nvidia
       serviceAccountName: ""
       volumes:
