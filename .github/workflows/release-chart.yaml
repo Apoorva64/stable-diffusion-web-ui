@@ -20,6 +20,6 @@ jobs:
         with:
           username: ${{ secrets.HARBOR_USER }}
           password: ${{ secrets.HARBOR_PASSWORD }}
-          registry-url: https://harbor.devops-tools.apoorva64.com/chartrepo/stable-diffusion
+          registry-url: https://harbor.devops-tools.apoorva64.com/stable-diffusion/stable-diffusion
           force: true
           chart-folder: charts/stable-diffusion-ui
