@@ -29,7 +29,7 @@ spec:
             - containerPort: 7860
           resources:
             limits:
-              nvidia.com/gpu: 1
+              nvidia.com/gpu: "1"
           volumeMounts:
             - mountPath: /home/webui
               name: webui-claim0
