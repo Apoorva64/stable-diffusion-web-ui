@@ -86,3 +86,5 @@ persistence:
   storageClass: ""
 
 runtimeClassName: ""
+
+commandlineArgs: "--listen --api --enable-insecure-extension-access"

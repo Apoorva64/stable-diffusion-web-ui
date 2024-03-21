@@ -52,6 +52,9 @@ spec:
               name: {{ include "stable-diffusion-ui.fullname" . }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          env:
+            - name: COMMANDLINE_ARGS
+              value: {{ .Values.commandlineArgs }}
       {{- with .Values.volumes }}
       volumes:
         - name: {{ include "stable-diffusion-ui.fullname" . }}
