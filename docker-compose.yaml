@@ -7,13 +7,13 @@ services:
       dockerfile: Dockerfile
     expose:
       - 7860  # gpu
-#    deploy:
-#      resources:
-#        reservations:
-#          devices:
-#            - driver: nvidia
-#              count: 1
-#              capabilities: [ gpu ]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
     volumes:
       - repositories:/home/webui/stable-diffusion-webui/repositories/
       - venv:/home/webui/stable-diffusion-webui/venv/
@@ -26,4 +26,10 @@ services:
       - COMMANDLINE_ARGS=--listen --api --enable-insecure-extension-access
 
 volumes:
-  data:
+  repositories:
+  venv:
+  webui-local:
+  webui-cache:
+  webui-torch:
+  models:
+  embeddings:

@@ -7,6 +7,8 @@ WORKDIR /home/webui/stable-diffusion-webui
 
 # install tcmalloc
 RUN apt-get update && apt-get install -y libtcmalloc-minimal4 libgl1-mesa-glx ffmpeg libsm6 libxext6 ibglib2.0-0 libxrender1
+# install build tools
+RUN apt-get install -y build-essential
 
 # Create a user
 RUN useradd -ms /bin/bash webui
