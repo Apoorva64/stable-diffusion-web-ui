@@ -62,6 +62,18 @@ spec:
           env:
             - name: COMMANDLINE_ARGS
               value: {{ .Values.commandlineArgs }}
+      initContainers:
+        - name: {{ .Chart.Name }}-volume-copy
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: {{ include "stable-diffusion-ui.fullname" . }}-venv
+              mountPath: /home/webui/stable-diffusion-webui/venv-volume/
+          command:
+            - /bin/sh
+            - -c
+            - |
+              cp -r /home/webui/stable-diffusion-webui/venv/* /home/webui/stable-diffusion-webui/venv-volume/
       volumes:
         - name: {{ include "stable-diffusion-ui.fullname" . }}-repositories
           persistentVolumeClaim:
