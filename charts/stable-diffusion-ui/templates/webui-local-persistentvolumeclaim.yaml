@@ -10,5 +10,5 @@ spec:
   resources:
     requests:
       storage: {{ .Values.persistence.local.size }}
-  storageClassName: local-storage
+  storageClassName: {{ .Values.persistence.local.storageClass }}
 status: {}
