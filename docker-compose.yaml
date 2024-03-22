@@ -1,3 +1,4 @@
+version: "3"
 services:
 
   webui:
@@ -6,15 +7,21 @@ services:
       dockerfile: Dockerfile
     expose:
       - 7860  # gpu
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [ gpu ]
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#              count: 1
+#              capabilities: [ gpu ]
     volumes:
-      - data:/home/webui
+      - repositories:/home/webui/stable-diffusion-webui/repositories/
+      - venv:/home/webui/stable-diffusion-webui/venv/
+      - webui-local:/home/webui/.local
+      - webui-cache:/home/webui/.cache
+      - webui-torch:/home/webui/.torch
+      - models:/home/webui/stable-diffusion-webui/models/
+      - embeddings:/home/webui/stable-diffusion-webui/embeddings/
     environment:
       - COMMANDLINE_ARGS=--listen --api --enable-insecure-extension-access
 

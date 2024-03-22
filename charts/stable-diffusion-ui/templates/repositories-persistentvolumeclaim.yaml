@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "stable-diffusion-ui.fullname" . }}-repositories
+  labels:
+    {{- include "stable-diffusion-ui.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.repositories.size }}
+  storageClassName: {{ .Values.persistence.repositories.storageClass }}
+status: { }

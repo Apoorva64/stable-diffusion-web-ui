@@ -40,28 +40,50 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
           volumeMounts:
-            - mountPath: /home/webui
-              name: {{ include "stable-diffusion-ui.fullname" . }}
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
+            - name: {{ include "stable-diffusion-ui.fullname" . }}-repositories
+              mountPath: /home/webui/stable-diffusion-webui/repositories/
+            - name: {{ include "stable-diffusion-ui.fullname" . }}-venv
+              mountPath: /home/webui/stable-diffusion-webui/venv/
+            - name: {{ include "stable-diffusion-ui.fullname" . }}-cache
+              mountPath: /home/webui/.cache
+            - name: {{ include "stable-diffusion-ui.fullname" . }}-local
+              mountPath: /home/webui/.local
+            - name: {{ include "stable-diffusion-ui.fullname" . }}-models
+              mountPath: /home/webui/stable-diffusion-webui/models/
+            - name: {{ include "stable-diffusion-ui.fullname" . }}-torch
+              mountPath: /home/webui/.torch
+            - name: {{ include "stable-diffusion-ui.fullname" . }}-embeddings
+              mountPath: /home/webui/stable-diffusion-webui/embeddings/
           env:
             - name: COMMANDLINE_ARGS
               value: {{ .Values.commandlineArgs }}
-      {{- with .Values.volumes }}
       volumes:
-        - name: {{ include "stable-diffusion-ui.fullname" . }}
+        - name: {{ include "stable-diffusion-ui.fullname" . }}-repositories
           persistentVolumeClaim:
-            claimName: {{ include "stable-diffusion-ui.fullname" . }}
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+            claimName: {{ include "stable-diffusion-ui.fullname" . }}-repositories
+        - name: {{ include "stable-diffusion-ui.fullname" . }}-venv
+          persistentVolumeClaim:
+            claimName: {{ include "stable-diffusion-ui.fullname" . }}-venv
+        - name: {{ include "stable-diffusion-ui.fullname" . }}-cache
+          persistentVolumeClaim:
+            claimName: {{ include "stable-diffusion-ui.fullname" . }}-cache
+        - name: {{ include "stable-diffusion-ui.fullname" . }}-local
+          persistentVolumeClaim:
+            claimName: {{ include "stable-diffusion-ui.fullname" . }}-local
+        - name: {{ include "stable-diffusion-ui.fullname" . }}-models
+          persistentVolumeClaim:
+            claimName: {{ include "stable-diffusion-ui.fullname" . }}-models
+        - name: {{ include "stable-diffusion-ui.fullname" . }}-torch
+          persistentVolumeClaim:
+            claimName: {{ include "stable-diffusion-ui.fullname" . }}-torch
+        - name: {{ include "stable-diffusion-ui.fullname" . }}-embeddings
+          persistentVolumeClaim:
+            claimName: {{ include "stable-diffusion-ui.fullname" . }}-embeddings
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
