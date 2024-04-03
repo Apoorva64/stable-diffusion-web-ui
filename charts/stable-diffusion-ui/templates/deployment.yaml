@@ -57,6 +57,8 @@ spec:
               mountPath: /home/webui/.torch
             - name: {{ include "stable-diffusion-ui.fullname" . }}-embeddings
               mountPath: /home/webui/stable-diffusion-webui/embeddings/
+            - name: {{ include "stable-diffusion-ui.fullname" . }}-output
+              mountPath: /home/webui/stable-diffusion-webui/output/
           env:
             - name: COMMANDLINE_ARGS
               value: {{ .Values.commandlineArgs }}
@@ -82,6 +84,9 @@ spec:
         - name: {{ include "stable-diffusion-ui.fullname" . }}-embeddings
           persistentVolumeClaim:
             claimName: {{ include "stable-diffusion-ui.fullname" . }}-embeddings
+        - name: {{ include "stable-diffusion-ui.fullname" . }}-output
+          persistentVolumeClaim:
+            claimName: {{ include "stable-diffusion-ui.fullname" . }}-output
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
